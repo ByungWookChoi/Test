@@ -2,6 +2,30 @@
 #include<iostream>
 #include<stdio.h>
 using namespace std;
+int *Array;
+int *maxArray;
+int result = -1;
+void FindMaxValue(int index)
+{
+	int maxValue = -1;
+	int maxIdx;
+	for (int i = 0; i < index; i++)
+	{
+		if (Array[i] < Array[index])
+		{
+			if (maxValue < maxArray[i])
+			{
+				maxValue = maxArray[i];
+				maxIdx = i;
+			}
+
+		}
+	}
+
+	maxArray[index] = maxArray[maxIdx] + 1;
+	if (result < maxArray[index])
+		result = maxArray[index];
+}
 
 int main()
 {
@@ -10,37 +34,31 @@ int main()
 
 	for (int i = 0; i < T; i++)
 	{
-		int numOfArray;
-		scanf("%d", &numOfArray);
-		int *arr = new int[numOfArray];
-		for (int index = 0; index < numOfArray; index++)
+		int arrayLength;
+		scanf("%d", &arrayLength);
+		Array = new int[arrayLength];
+		maxArray = new int[arrayLength];
+		int max = 1;
+		for (int j = 0; j < arrayLength; j++)
 		{
-			scanf("%d", &arr[index]);
+			scanf("%d", &Array[j]);
 		}
-		int k;
-		int maxValue = 0;
-		int localMaxValue;
-		for (int j = 0; j < numOfArray; j++)
+		for (int j = 0; j < arrayLength; j++)
 		{
-			localMaxValue = 1;
-			for (k = j+1; k < numOfArray-1; k++)
+			if (j>0)
 			{
-				if (arr[j]>arr[k])
-				{
-					localMaxValue++;
-				}
-				else
-				{
-					break;
-				}
+				FindMaxValue(j);
 			}
-			if (localMaxValue > maxValue)
-				maxValue = localMaxValue;
+			else
+			{
+				maxArray[j] = 1;
+			}
 		}
-		printf("%d\n", maxValue);
-
+		
+		printf("%d\n", result);
+		result = -1;
+		delete[] Array;
+		delete[] maxArray;
 	}
-
-
 	return 0;
 }

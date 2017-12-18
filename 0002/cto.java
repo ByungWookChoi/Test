@@ -5,7 +5,7 @@ class practice {
 		Scanner sc = new Scanner (System.in);
 		int test_case = sc.nextInt();
 		for (int tc=0; tc<test_case; tc++) {
-			int n = sc.nextInt(); int[][] a = new int[n][3]; int max=0;
+			int n = sc.nextInt(); int[][] a = new int[n][2]; int max=0;
 			for (int i=0; i<n; i++) a[i][0] = sc.nextInt(); 
             for (int i=0; i<n; i++) { //n^2
 				int temp=0;
